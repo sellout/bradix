@@ -41,10 +41,9 @@ However, each of these has problems. Leaving off the annotation can be ambiguous
 The issue with prefixes is that they’re arbitrary and don’t generalize. You just have to /know/ that ~0x~ indicates hexidecimal. Even with prefixes like ~#12r~, it’s contextual that the 12 is decimal. And, why use decimal?
 
 Instead, Bradix uses an ever-present radix point and tries to simplify it as much as possible. I considered a unary system, but it doesn’t have any sort of Unicode support, and it becomes hard to read. Wait … is there 12 dots there or 16? But binary – still representable using only dots, but much more compact. And it has a standard ordering of the dots and Unicode support. So, our bases in binary look like
-#+begin_example
-0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 …
-⠀  ⠁  ⠂  ⠃  ⠄  ⠅  ⠆  ⠇  ⠈  ⠉  ⠊  ⠋  ⠌  ⠍  ⠎  ⠏  ⠐  ⠑  ⠒  ⠓  ⠔  ⠕  ⠖ …
-#+end_example
+#+TBLNAME: bases
+| 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | … |
+|   | ⠁ | ⠂ | ⠃ | ⠄ | ⠅ | ⠆ | ⠇ | ⠈ | ⠉ |  ⠊ |  ⠋ |  ⠌ |  ⠍ |  ⠎ |  ⠏ |  ⠐ |  ⠑ |  ⠒ |  ⠓ |  ⠔ |  ⠕ |  ⠖ | … |
 
 And the code points are in the correct ordering for this use case, so you can subtract BRAILLE PATTERN BLANK from the code point of your character to figure out the radix.
 
