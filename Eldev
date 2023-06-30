@@ -5,6 +5,6 @@
 (setq
   ;; run all linters by default
   eldev-lint-default t
-  ;; except ‘package-lint’, because it’s also run within ‘elisp-lint’ (see
+  ;; except ‘package’, because it’s also run within ‘elisp-lint’ (see
   ;; ‘eldev-linter-elisp’)
-  eldev-lint-default-excluded '(package-lint))
+  eldev-lint-default-excluded '(package))

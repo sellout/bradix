@@ -47,7 +47,7 @@
                   # These attributes are simply required by home-manager.
                   home = {
                     homeDirectory = /tmp/${ename}-example;
-                    stateVersion = "22.11";
+                    stateVersion = "23.05";
                     username = "${ename}-example-user";
                   };
                 }
@@ -68,6 +68,8 @@
       emacsPath = package: "${package}/share/emacs/site-lisp/elpa/${package.pname}-${package.version}";
 
       ## Read version in format: ;; Version: xx.yy
+      ## TODO: Generalize function to try reading from a `define-package` form
+      ##       first.
       readVersion = fp:
         builtins.elemAt
         (builtins.match
@@ -99,6 +101,15 @@
               pkgs.emacsPackages.eldev
             ];
 
+            postPatch = ''
+              {
+                echo
+                echo "(mapcar"
+                echo " 'eldev-use-local-dependency"
+                echo " '(\"${emacsPath pkgs.emacsPackages.buttercup}\"))"
+              } >> Eldev
+            '';
+
             doCheck = true;
 
             checkPhase = ''
@@ -107,7 +118,7 @@
               ##      `eldev--create-internal-pseudoarchive-descriptor`.
               export HOME="$PWD/fake-home"
               mkdir -p "$HOME"
-              eldev test
+              eldev --external test
               runHook postCheck
             '';
 
@@ -115,7 +126,7 @@
 
             installCheckPhase = ''
               runHook preInstallCheck
-              eldev --packaged test
+              eldev --external --packaged test
               runHook postInstallCheck
             '';
           });
@@ -156,6 +167,10 @@
 
             buildPhase = ''
               runHook preBuild
+              ## TODO: Currently needed to make a temp file in
+              ##      `eldev--create-internal-pseudoarchive-descriptor`.
+              export HOME="$PWD/fake-home"
+              mkdir -p "$HOME/.cache/eldev"
               eldev doctor
               runHook postBuild
             '';
@@ -257,9 +272,9 @@
 
     home-manager = {
       inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:nix-community/home-manager/release-22.11";
+      url = "github:nix-community/home-manager/release-23.05";
     };
 
-    nixpkgs.url = "github:NixOS/nixpkgs/release-22.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/release-23.05";
   };
 }
