@@ -3,7 +3,7 @@
 ;; Author: Greg Pfeil <greg@technomadic.org>
 ;; Keywords: lisp
 ;; Package-Requires: ((emacs "25.1"))
-;; URL: https://github.com/sellout/emacs-bradix
+;; URL: https://github.com/sellout/bradix
 ;; Version: 0.1.0
 
 ;;; Commentary:

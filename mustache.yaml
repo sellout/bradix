@@ -1,0 +1,11 @@
+{
+  project:
+    {
+      description: "More consistent, less biased numeric notation.",
+      name: "bradix",
+      repo: "sellout/bradix",
+      summary: "Braille-radix numbers",
+      version: "0.1.0",
+    },
+  type: { name: "emacs-lisp" },
+}

@@ -6,7 +6,9 @@ bradix
  ━━━━━
 #+end_example
 
-Braille-radix numbers.
+Braille-radix numbers
+
+More consistent, less biased numeric notation.
 
 * What?
 

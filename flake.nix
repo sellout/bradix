@@ -1,5 +1,5 @@
 {
-  description = "Braille-radix numbers.";
+  description = "Braille-radix numbers";
 
   nixConfig = {
     ## https://github.com/NixOS/rfcs/blob/master/rfcs/0045-deprecate-url-syntax.md
@@ -36,7 +36,7 @@
             [
               ({pkgs, ...}: {
                 home.packages = [
-                  (pkgs.emacs.withPackages (epkgs: [
+                  (pkgs.emacsWithPackages (epkgs: [
                     epkgs.${pname}
                   ]))
                 ];
@@ -75,7 +75,6 @@
         format = format.check inputs.self;
       };
 
-      # Nix code formatter, https://github.com/kamadorueda/alejandra#readme
       formatter = format.wrapper;
     });
 
