@@ -78,6 +78,7 @@
       packages = {
         default = self.packages.${system}.${ename};
         "${ename}" = flaky.lib.elisp.package pkgs src pname (epkgs: [
+          epkgs.buttercup
           epkgs.elisp-reader
         ]);
       };

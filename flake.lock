@@ -39,11 +39,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1701442241,
-        "narHash": "sha256-DU9NIX1uGgMmiUYDOSWnjl7kB6Lw0MxN1IgcEL8XR1M=",
+        "lastModified": 1701510463,
+        "narHash": "sha256-2QyiN83fvcSaJtW7LhX2pNyqNdT8hTiJQHfDbNiAc80=",
         "owner": "sellout",
         "repo": "elisp-reader.el",
-        "rev": "f6776c65bcb2a0ce1f56025fdac6069e9eca30ab",
+        "rev": "1d4c29cd36a384ecd8a93938058b8a2efb6f4eff",
         "type": "github"
       },
       "original": {
@@ -134,11 +134,11 @@
         "project-manager": "project-manager"
       },
       "locked": {
-        "lastModified": 1701442056,
-        "narHash": "sha256-0z3FeS2Wa2E6kgg5GT/ZyVJfjfHtnmB3NsdR8ba4VUM=",
+        "lastModified": 1701501993,
+        "narHash": "sha256-WDqP0ZWz06oJleUoSF6Kw/QWAy+FpISvsz35XgrZk8E=",
         "owner": "sellout",
         "repo": "flaky",
-        "rev": "0f5cf15cbce1a677e29f700a015b7722505dab87",
+        "rev": "1f6087349abfce2b5f6f2a10487154d7850be511",
         "type": "github"
       },
       "original": {
@@ -218,11 +218,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1701481439,
-        "narHash": "sha256-dXM1r+6OQyxXTM1+uSCph+SemB5gLX42LH3Lyz9vQe4=",
+        "lastModified": 1701508900,
+        "narHash": "sha256-is/k/r9JtF5NT9EXT3gwXQy4ZcklPZpzLIYe2u6SrDY=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "e474d3b5fe8ed1379cf38ad885d4782af4c5b887",
+        "rev": "eb6d2ed39d841af1929d65b66dce2b77f7697a1f",
         "type": "github"
       },
       "original": {
