@@ -4,91 +4,122 @@
   nixConfig = {
     ## https://github.com/NixOS/rfcs/blob/master/rfcs/0045-deprecate-url-syntax.md
     extra-experimental-features = ["no-url-literals"];
+    extra-substituters = ["https://cache.garnix.io"];
     extra-trusted-public-keys = [
       "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
     ];
-    extra-trusted-substituters = ["https://cache.garnix.io"];
     ## Isolate the build.
     registries = false;
-    sandbox = true;
+    sandbox = false;
   };
 
-  outputs = inputs: let
+  outputs = {
+    elisp-reader,
+    flake-utils,
+    flaky,
+    nixpkgs,
+    self,
+  }: let
     pname = "bradix";
     ename = "emacs-${pname}";
   in
     {
+      schemas = {
+        inherit
+          (flaky.schemas)
+          overlays
+          homeConfigurations
+          packages
+          devShells
+          projectConfigurations
+          checks
+          formatter
+          ;
+      };
+
       overlays = {
-        default =
-          inputs.flaky.lib.elisp.overlays.default inputs.self.overlays.emacs;
+        default = flaky.lib.elisp.overlays.default self.overlays.emacs;
 
         emacs = final: prev: efinal: eprev: {
-          "${pname}" = inputs.self.packages.${final.system}.${ename};
+          "${pname}" = self.packages.${final.system}.${ename};
         };
       };
 
       homeConfigurations =
         builtins.listToAttrs
         (builtins.map
-          (inputs.flaky.lib.homeConfigurations.example
+          (flaky.lib.homeConfigurations.example
             pname
-            inputs.self
+            self
             [
               ({pkgs, ...}: {
-                home.packages = [
-                  (pkgs.emacsWithPackages (epkgs: [
-                    epkgs.${pname}
-                  ]))
-                ];
+                programs.emacs = {
+                  enable = true;
+                  extraConfig = ''
+                    (require '${pname})
+                  '';
+                  extraPackages = epkgs: [epkgs.${pname}];
+                };
               })
             ])
-          inputs.flake-utils.lib.defaultSystems);
+          flake-utils.lib.defaultSystems);
     }
-    // inputs.flake-utils.lib.eachDefaultSystem (system: let
-      pkgs = import inputs.nixpkgs {
+    // flake-utils.lib.eachDefaultSystem (system: let
+      pkgs = import nixpkgs {
         inherit system;
         overlays = [
-          inputs.elisp-reader.overlays.default
-          inputs.flaky.overlays.elisp-dependencies
+          elisp-reader.overlays.default
+          flaky.overlays.elisp-dependencies
         ];
       };
 
       src = pkgs.lib.cleanSource ./.;
-
-      format = inputs.flaky.lib.format pkgs {};
     in {
       packages = {
-        default = inputs.self.packages.${system}.${ename};
-        "${ename}" = inputs.flaky.lib.elisp.package pkgs src pname (epkgs: [
+        default = self.packages.${system}.${ename};
+        "${ename}" = flaky.lib.elisp.package pkgs src pname (epkgs: [
           epkgs.elisp-reader
         ]);
       };
 
-      devShells.default =
-        inputs.flaky.lib.devShells.default pkgs inputs.self [] "";
+      devShells.default = flaky.lib.devShells.default pkgs self [] "";
 
-      checks = {
-        elisp-doctor = inputs.flaky.lib.elisp.checks.doctor pkgs src;
-        elisp-lint = inputs.flaky.lib.elisp.checks.lint pkgs src (epkgs: [
-          epkgs.elisp-reader
-        ]);
-        format = format.check inputs.self;
-      };
+      projectConfigurations =
+        flaky.lib.projectConfigurations.default {inherit pkgs self;};
 
-      formatter = format.wrapper;
+      checks =
+        self.projectConfigurations.${system}.checks
+        // {
+          elisp-doctor = flaky.lib.elisp.checks.doctor pkgs src;
+          elisp-lint = flaky.lib.elisp.checks.lint pkgs src (epkgs: [
+            epkgs.elisp-reader
+          ]);
+        };
+
+      formatter = self.projectConfigurations.${system}.formatter;
     });
 
   inputs = {
     elisp-reader = {
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs = {
+        flake-utils.follows = "flake-utils";
+        flaky.follows = "flaky";
+        nixpkgs.follows = "nixpkgs";
+      };
       ## TODO: Stop using my fork
       url = "github:sellout/elisp-reader.el/add-build";
     };
 
     flake-utils.url = "github:numtide/flake-utils";
 
-    flaky.url = "github:sellout/flaky";
+    flaky = {
+      inputs = {
+        flake-utils.follows = "flake-utils";
+        nixpkgs.follows = "nixpkgs";
+      };
+      url = "github:sellout/flaky";
+    };
 
-    nixpkgs.url = "github:NixOS/nixpkgs/release-23.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/release-23.11";
   };
 }
