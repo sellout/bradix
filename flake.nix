@@ -10,7 +10,7 @@
     ];
     ## Isolate the build.
     registries = false;
-    sandbox = false;
+    sandbox = "relaxed";
   };
 
   outputs = {
@@ -83,10 +83,12 @@
         ]);
       };
 
-      devShells.default = flaky.lib.devShells.default pkgs self [] "";
-
       projectConfigurations =
         flaky.lib.projectConfigurations.default {inherit pkgs self;};
+
+      devShells =
+        self.projectConfigurations.${system}.devShells
+        // {default = flaky.lib.devShells.default system self [] "";};
 
       checks =
         self.projectConfigurations.${system}.checks
