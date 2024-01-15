@@ -6,4 +6,6 @@
 !/.cache/vale/Vocab/
 /.cache/vale/Vocab/*
 !/.cache/vale/Vocab/bradix/
+/.local/state/project-manager/
+/.local/state/nix/profiles/
 /.cache/direnv/
