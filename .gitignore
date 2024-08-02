@@ -3,6 +3,11 @@
 *.elc
 /.eldev
 /.cache/vale/*
+!/.cache/vale/config/
+/.cache/vale/config/*
+!/.cache/vale/config/vocabularies/
+/.cache/vale/config/vocabularies/*
+!/.cache/vale/config/vocabularies/bradix/
 !/.cache/vale/Vocab/
 /.cache/vale/Vocab/*
 !/.cache/vale/Vocab/bradix/

@@ -1,8 +1,8 @@
 #+title: Bradix
 
 [[https://garnix.io][https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fgarnix.io%2Fapi%2Fbadges%2Fsellout%2Fbradix]]
-[[https://repology.org/project/bradix/versions][https://repology.org/badge/tiny-repos/bradix.svg]]
-[[https://repology.org/project/bradix/versions][https://repology.org/badge/latest-versions/bradix.svg]]
+[[https://repology.org/project/emacs-bradix/versions][https://repology.org/badge/tiny-repos/emacs-bradix.svg]
+[[https://repology.org/project/emacs-bradix/versions][https://repology.org/badge/latest-versions/emacs-bradix.svg]
 
 #+begin_example
 ━━━
@@ -63,7 +63,7 @@ See [[file:bradix-tests.el][bradix-tests.el]] and [[file:bradix-reader-tests.el]
 
 ** preferred
 
-Especially if you are unfamiliar with the Emacs ecosystem, there is a Nix flake that wraps all the Eldev functionality, and provides overlays, etc.
+Especially if you are unfamiliar with the Emacs ecosystem, there is a flake-based Nix build.
 
 ** traditional
 
