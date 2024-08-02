@@ -22,6 +22,8 @@
   }: let
     pname = "bradix";
     ename = "emacs-${pname}";
+
+    supportedSystems = flaky.lib.defaultSystems;
   in
     {
       schemas = {
@@ -48,27 +50,23 @@
       homeConfigurations =
         builtins.listToAttrs
         (builtins.map
-          (flaky.lib.homeConfigurations.example
-            pname
-            self
-            [
-              ({pkgs, ...}: {
-                programs.emacs = {
-                  enable = true;
-                  extraConfig = ''
-                    (require '${pname})
-                  '';
-                  extraPackages = epkgs: [epkgs.${pname}];
-                };
-              })
-            ])
-          flake-utils.lib.defaultSystems);
+          (flaky.lib.homeConfigurations.example self [
+            ({pkgs, ...}: {
+              programs.emacs = {
+                enable = true;
+                extraConfig = "(require '${pname})";
+                extraPackages = epkgs: [epkgs.${pname}];
+              };
+            })
+          ])
+          supportedSystems);
     }
-    // flake-utils.lib.eachDefaultSystem (system: let
+    // flake-utils.lib.eachSystem supportedSystems (system: let
       pkgs = import nixpkgs {
         inherit system;
         overlays = [
           elisp-reader.overlays.default
+          flaky.overlays.dependencies
           flaky.overlays.elisp-dependencies
         ];
       };
@@ -103,26 +101,16 @@
     });
 
   inputs = {
+    ## Flaky should generally be the source of truth for its inputs.
+    flaky.url = "github:sellout/flaky";
+
+    flake-utils.follows = "flaky/flake-utils";
+    nixpkgs.follows = "flaky/nixpkgs";
+
     elisp-reader = {
-      inputs = {
-        flake-utils.follows = "flake-utils";
-        flaky.follows = "flaky";
-        nixpkgs.follows = "nixpkgs";
-      };
+      inputs.flaky.follows = "flaky";
       ## TODO: Stop using my fork
       url = "github:sellout/elisp-reader.el/add-build";
     };
-
-    flake-utils.url = "github:numtide/flake-utils";
-
-    flaky = {
-      inputs = {
-        flake-utils.follows = "flake-utils";
-        nixpkgs.follows = "nixpkgs";
-      };
-      url = "github:sellout/flaky";
-    };
-
-    nixpkgs.url = "github:NixOS/nixpkgs/release-23.11";
   };
 }
