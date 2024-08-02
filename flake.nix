@@ -66,6 +66,7 @@
         inherit system;
         overlays = [
           elisp-reader.overlays.default
+          flaky.overlays.dependencies
           flaky.overlays.elisp-dependencies
         ];
       };
