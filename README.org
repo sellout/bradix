@@ -1,8 +1,9 @@
 #+title: Bradix
 
-[[https://garnix.io][https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fgarnix.io%2Fapi%2Fbadges%2Fsellout%2Fbradix]]
-[[https://repology.org/project/emacs-bradix/versions][https://repology.org/badge/tiny-repos/emacs-bradix.svg]
-[[https://repology.org/project/emacs-bradix/versions][https://repology.org/badge/latest-versions/emacs-bradix.svg]
+#+ATTR_HTML: :alt built with garnix
+[[https://garnix.io/repo/sellout/bradix][https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fgarnix.io%2Fapi%2Fbadges%2Fsellout%2Fbradix]]
+[[https://repology.org/project/emacs:bradix/versions][https://repology.org/badge/tiny-repos/emacs:bradix.svg]]
+[[https://repology.org/project/emacs:bradix/versions][https://repology.org/badge/latest-versions/emacs:bradix.svg]]
 
 #+begin_example
 ━━━
@@ -40,7 +41,12 @@ Some things you can see in those examples
 
 * Why?
 
-There are various notations numbers in various bases. Sometimes, we don’t need any annotation at all; other times there is a prefix, like ~0x~ or ~b~; and sometimes a decimal number is used to explicitly name the base, as in ~#12r17~ (which is 19 (in decimal) written using base-12) or 17₁₂0 (which is the same, but written using the decimal representation of the base /as/ the radix point.
+There are various notations for numbers in various bases.
+
+#+ATTR_HTML: :alt XKCD comic about standards proliferation. Transcript available at https://www.explainxkcd.com/wiki/index.php/927:_Standards
+[[https://xkcd.com/927][https://imgs.xkcd.com/comics/standards.png]]
+
+Sometimes, we don’t need any annotation at all; other times there is a prefix, like ~0x~ or ~b~; and sometimes a decimal number is used to explicitly name the base, as in ~#12r17~ (which is 19 (in decimal) written using base-12) or 17₁₂0 (which is the same, but written using the decimal representation of the base /as/ the radix point.
 
 However, each of these has problems. Leaving off the annotation can be ambiguous sometimes. When you see “17” you can be /reasonably/ sure that the base is at least octal, but nothing tells you definitively what it is. Usually it’ll be decimal, but bare hex numbers aren’t uncommon in some contexts.
 
