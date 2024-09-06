@@ -1,8 +1,9 @@
 #+title: Bradix
 
-[[https://garnix.io][https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fgarnix.io%2Fapi%2Fbadges%2Fsellout%2Fbradix]]
-[[https://repology.org/project/emacs-bradix/versions][https://repology.org/badge/tiny-repos/emacs-bradix.svg]
-[[https://repology.org/project/emacs-bradix/versions][https://repology.org/badge/latest-versions/emacs-bradix.svg]
+#+ATTR_HTML: :alt built with garnix
+[[https://garnix.io/repo/sellout/bradix][https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fgarnix.io%2Fapi%2Fbadges%2Fsellout%2Fbradix]]
+[[https://repology.org/project/emacs:bradix/versions][https://repology.org/badge/tiny-repos/emacs:bradix.svg]]
+[[https://repology.org/project/emacs:bradix/versions][https://repology.org/badge/latest-versions/emacs:bradix.svg]]
 
 #+begin_example
 ━━━
