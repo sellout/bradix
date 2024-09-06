@@ -41,7 +41,7 @@ Some things you can see in those examples
 
 * Why?
 
-There are various notations numbers in various bases. Sometimes, we don’t need any annotation at all; other times there is a prefix, like ~0x~ or ~b~; and sometimes a decimal number is used to explicitly name the base, as in ~#12r17~ (which is 19 (in decimal) written using base-12) or 17₁₂0 (which is the same, but written using the decimal representation of the base /as/ the radix point.
+There are various notations for numbers in various bases. Sometimes, we don’t need any annotation at all; other times there is a prefix, like ~0x~ or ~b~; and sometimes a decimal number is used to explicitly name the base, as in ~#12r17~ (which is 19 (in decimal) written using base-12) or 17₁₂0 (which is the same, but written using the decimal representation of the base /as/ the radix point.
 
 However, each of these has problems. Leaving off the annotation can be ambiguous sometimes. When you see “17” you can be /reasonably/ sure that the base is at least octal, but nothing tells you definitively what it is. Usually it’ll be decimal, but bare hex numbers aren’t uncommon in some contexts.
 
