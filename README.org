@@ -2,7 +2,9 @@
 
 #+ATTR_HTML: :alt built with garnix
 [[https://garnix.io/repo/sellout/bradix][https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fgarnix.io%2Fapi%2Fbadges%2Fsellout%2Fbradix]]
+#+ATTR_HTML: :alt Packaging status
 [[https://repology.org/project/emacs:bradix/versions][https://repology.org/badge/tiny-repos/emacs:bradix.svg]]
+#+ATTR_HTML: :alt Latest packaged versions
 [[https://repology.org/project/emacs:bradix/versions][https://repology.org/badge/latest-versions/emacs:bradix.svg]]
 
 #+begin_example
@@ -64,6 +66,18 @@ So 17⠌ is now clearly 19⠊.
 [[file:bradix.el::bradix-parse][bradix-parse]] extracts a Bradix-formatted number from a string. If you ~(require 'bradix-reader)~, then there is also a syntax extension that causes Bradix-formatted numbers prefixed by ~⠼~ (the braille numeric indicator) to be read directly as literals.
 
 See [[file:bradix-tests.el][bradix-tests.el]] and [[file:bradix-reader-tests.el][bradix-reader-tests.el]] for some examples.
+
+* development environment
+
+We recommend the following steps to make working in this repository as easy as possible.
+
+** ~direnv allow~
+
+This command ensures that any work you do within this repository happens within a consistent reproducible environment. That environment provides various debugging tools, etc. When you leave this directory, you will leave that environment behind, so it doesn’t impact anything else on your system.
+
+** ~git config --local include.path ../.cache/git/config~
+
+This will apply our repository-specific Git configuration to ~git~ commands run against this repository. It’s lightweight (you should definitely look at it before applying this command) – it does things like telling ~git blame~ to ignore formatting-only commits.
 
 * building
 
