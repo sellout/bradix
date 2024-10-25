@@ -5,7 +5,6 @@
       name: "bradix",
       repo: "sellout/bradix",
       summary: "Braille-radix numbers",
-      version: "0.1.0",
     },
   type: { name: "emacs-lisp" },
 }

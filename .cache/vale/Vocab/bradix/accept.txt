@@ -1,10 +1,11 @@
 direnv
+formatter
 garnix
 [Nn]ix
 Pfeil
 ShellCheck
 [Bb]radix
 dozenal
-Eldev
 hexidecimal
 unary
+Eldev

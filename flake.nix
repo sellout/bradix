@@ -9,8 +9,8 @@
       "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
     ];
     ## Isolate the build.
-    registries = false;
     sandbox = "relaxed";
+    use-registries = false;
   };
 
   outputs = {
@@ -19,11 +19,12 @@
     flaky,
     nixpkgs,
     self,
+    systems,
   }: let
     pname = "bradix";
     ename = "emacs-${pname}";
 
-    supportedSystems = flaky.lib.defaultSystems;
+    supportedSystems = import systems;
   in
     {
       schemas = {
@@ -62,14 +63,11 @@
           supportedSystems);
     }
     // flake-utils.lib.eachSystem supportedSystems (system: let
-      pkgs = import nixpkgs {
-        inherit system;
-        overlays = [
-          elisp-reader.overlays.default
-          flaky.overlays.dependencies
-          flaky.overlays.elisp-dependencies
-        ];
-      };
+      pkgs = nixpkgs.legacyPackages.${system}.appendOverlays [
+        elisp-reader.overlays.default
+        flaky.overlays.dependencies
+        flaky.overlays.elisp-dependencies
+      ];
 
       src = pkgs.lib.cleanSource ./.;
     in {
@@ -82,7 +80,7 @@
       };
 
       projectConfigurations =
-        flaky.lib.projectConfigurations.default {inherit pkgs self;};
+        flaky.lib.projectConfigurations.emacs-lisp {inherit pkgs self;};
 
       devShells =
         self.projectConfigurations.${system}.devShells
@@ -106,6 +104,7 @@
 
     flake-utils.follows = "flaky/flake-utils";
     nixpkgs.follows = "flaky/nixpkgs";
+    systems.follows = "flaky/systems";
 
     elisp-reader = {
       inputs.flaky.follows = "flaky";
