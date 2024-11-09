@@ -65,7 +65,7 @@
     // flake-utils.lib.eachSystem supportedSystems (system: let
       pkgs = nixpkgs.legacyPackages.${system}.appendOverlays [
         elisp-reader.overlays.default
-        flaky.overlays.dependencies
+        flaky.overlays.default
         flaky.overlays.elisp-dependencies
       ];
 
@@ -73,7 +73,7 @@
     in {
       packages = {
         default = self.packages.${system}.${ename};
-        "${ename}" = flaky.lib.elisp.package pkgs src pname (epkgs: [
+        "${ename}" = pkgs.elisp.package pname src (epkgs: [
           epkgs.buttercup
           epkgs.elisp-reader
         ]);
@@ -89,10 +89,8 @@
       checks =
         self.projectConfigurations.${system}.checks
         // {
-          elisp-doctor = flaky.lib.elisp.checks.doctor pkgs src;
-          elisp-lint = flaky.lib.elisp.checks.lint pkgs src (epkgs: [
-            epkgs.elisp-reader
-          ]);
+          elisp-doctor = pkgs.elisp.checks.doctor src;
+          elisp-lint = pkgs.elisp.checks.lint src (epkgs: [epkgs.elisp-reader]);
         };
 
       formatter = self.projectConfigurations.${system}.formatter;
